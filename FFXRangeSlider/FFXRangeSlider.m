@@ -59,7 +59,10 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 
 - (CGSize)intrinsicContentSize
 {
-    return CGSizeMake(UIViewNoIntrinsicMetric, _handleDiameter);
+    if (self.steps.count > 0) {
+        return CGSizeMake(UIViewNoIntrinsicMetric, _edgeInsets.top + _stepView.intrinsicContentSize.height + _edgeInsets.bottom);
+    }
+    return CGSizeMake(UIViewNoIntrinsicMetric, _edgeInsets.top + _handleDiameter + _edgeInsets.bottom);
 }
 
 - (void)layoutSubviews
@@ -290,13 +293,11 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     [gestureRecognizer setTranslation:CGPointZero inView:self];
     CGFloat fromValue = [self ms_applyTranslation:translation.x forValue:self.underlyingFromValue];
     self.underlyingFromValue = MAX(MIN(fromValue, self.toValue - self.minInterval), self.minValue);
-    
-
 }
 
 - (void)ms_didPanToThumbView:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateFailed) {
 
         [UIView transitionWithView:self
                           duration:kRangeSliderTransitionDuration

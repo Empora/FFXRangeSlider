@@ -35,6 +35,10 @@
     [self setNeedsUpdateConstraints];
 }
 
+- (CGSize)intrinsicContentSize{
+    return CGSizeMake(UIViewNoIntrinsicMetric, ((self.labels.count > 0) ? (_sliderHeight/2.0 + _lineSize.height/2.0 + _padding + [[self.labels firstObject] intrinsicContentSize].height) : UIViewNoIntrinsicMetric));
+}
+
 #pragma mark Properties
 
 - (void)setSteps:(NSArray<NSString *> *)steps{
@@ -118,14 +122,19 @@
         }
     }
     
+    // do not highlight if range has not been modified and goes from 0 - MAX
+    BOOL isDefaultSetting = (minIndex == 0 && maxIndex == self.steps.count-1);
+    
     for (NSUInteger i = 0; i < self.steps.count; i++) {
-        if (i <= minIndex || i >= maxIndex) {
+        if (i < minIndex || i > maxIndex || isDefaultSetting) {
             self.verticalLines[i].backgroundColor = self.color;
+            self.labels[i].textColor = self.color;
         } else {
             self.verticalLines[i].backgroundColor = self.activeColor;
+            self.labels[i].textColor = self.activeColor;
         }
     }
-    
+    [self setNeedsLayout];
 }
 
 #pragma mark UIView
@@ -187,6 +196,8 @@
         }
         _constraints = constraints;
         [self addConstraints:constraints];
+        
+        [self invalidateIntrinsicContentSize];
     }
     
     [super updateConstraints];
