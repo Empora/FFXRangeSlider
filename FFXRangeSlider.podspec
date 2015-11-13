@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'FFXRangeSlider'
-    s.version      = '0.2'
+    s.version      = '0.3'
     s.license      = { :type => 'MIT' }
     s.homepage     = 'https://github.com/empora/FFXRangeSlider'
     s.authors      = { 'Robert Biehl' => 'robert.biehl@empora.com', 'Maksym Shcheglov' => 'maxscheglov@gmail.com' }

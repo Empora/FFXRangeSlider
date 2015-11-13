@@ -100,11 +100,11 @@ IB_DESIGNABLE
 /**
  *  @abstract If the slider is stepped the fromIndex represents the left handle's index
  */
-@property (nonatomic, readonly) NSUInteger fromIndex;
+@property (nonatomic, assign) NSUInteger fromIndex;
 /**
  *  @abstract If the slider is stepped the toIndex represents the right handle's index
  */
-@property (nonatomic, readonly) NSUInteger toIndex;
+@property (nonatomic, assign) NSUInteger toIndex;
 
 @end
 

@@ -18,9 +18,6 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 @property (nonatomic, assign) CGFloat underlyingFromValue;
 @property (nonatomic, assign) CGFloat underlyingToValue;
 
-@property (nonatomic, assign) NSUInteger fromIndex;
-@property (nonatomic, assign) NSUInteger toIndex;
-
 @property (nonatomic, assign) UIEdgeInsets trackAdjustments;
 
 @property (nonatomic, strong) CALayer *trackLayer;
@@ -93,8 +90,16 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     self.underlyingToValue = value;
 }
 
+- (void)setFromIndex:(NSUInteger)fromIndex{
+    self.fromValue = [self valueForStepIndex:fromIndex];
+}
+
 - (NSUInteger)fromIndex{
     return [self ms_calcStep:self.fromValue];
+}
+
+- (void)setToIndex:(NSUInteger)toIndex{
+    self.toValue = [self valueForStepIndex:toIndex];
 }
 
 - (NSUInteger)toIndex{
@@ -406,6 +411,11 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     return NSNotFound;
 }
 
+- (CGFloat) valueForStepIndex:(NSUInteger) index{
+    NSUInteger numSteps = self.steps.count;
+    return index*(self.maxValue/(numSteps-1));
+}
+
 - (CGFloat) ms_applySteps:(CGFloat) value leftBoundIndex:(NSUInteger) leftBoundIndex rightBoundIndex:(NSUInteger) rightBoundIndex{
     NSInteger step = [self ms_calcStep:value];
     if (step != NSNotFound) {
@@ -416,8 +426,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
             step = rightBoundIndex - 1;
         }
 
-        NSUInteger numSteps = self.steps.count;
-        value = step*(self.maxValue/(numSteps-1));
+        value = [self valueForStepIndex:step];
         
         if (value < 0) {
             NSLog(@"aa");
