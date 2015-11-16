@@ -32,6 +32,9 @@
 - (IBAction)toggleSteps:(UISwitch*)sender{
     self.slider.steps = sender.on ? @[@"0", @"100", @"300", @"500", @"MAX"] : nil;
 }
+- (IBAction)toggleSelectTrackForDefaultSelection:(UISwitch*)sender{
+    self.slider.selectTrackForDefaultSelection = sender.on;
+}
 
 - (IBAction)valueChanged:(FFXRangeSlider*)slider{
     self.label.text = [NSString stringWithFormat:@"%f - %f", slider.fromValue, slider.toValue];

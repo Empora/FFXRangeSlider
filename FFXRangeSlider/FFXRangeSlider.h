@@ -34,6 +34,10 @@ IB_DESIGNABLE
  *  @abstract The color used to tint the selected range.
  */
 @property (nonatomic, strong) IBInspectable UIColor *selectedTrackTintColor;// UI_APPEARANCE_SELECTOR;
+/**
+ *  @abstract Whether to highlight the track for default 0-MAX settings
+ */
+@property (nonatomic, assign) IBInspectable BOOL selectTrackForDefaultSelection;// UI_APPEARANCE_SELECTOR;
 
 
 /**

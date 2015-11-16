@@ -202,6 +202,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     _trackAdjustments = UIEdgeInsetsMake(0, _handleDiameter/2.0, 0.0, _handleDiameter/2.0);
     
     _selectedTrackTintColor = [UIColor colorWithRed:0.0 green:122.0 / 255.0 blue:1.0 alpha:1.0];
+    _selectTrackForDefaultSelection = YES;
     _trackTintColor = [UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:1.0];
     _handleTintColor = [UIColor whiteColor];
     
@@ -239,6 +240,8 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 
 - (void)ms_updateTrackLayers
 {
+    BOOL showSelectedTrackLayer = self.selectTrackForDefaultSelection || (!_steps.count || self.fromIndex != 0 || self.toIndex != _steps.count-1);
+    
     CGFloat width = CGRectGetWidth(self.bounds);
     
     self.trackLayer.bounds = CGRectMake(0, 0, width - (self.edgeInsets.left+self.edgeInsets.right), _trackWidth);
@@ -250,25 +253,26 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     [CATransaction begin];
     [CATransaction setValue:(id)kCFBooleanTrue
                      forKey:kCATransactionDisableActions];
+    self.selectedTrackLayer.opacity = showSelectedTrackLayer ? 1.0 : 0.0;
     self.selectedTrackLayer.bounds = CGRectMake(0, 0, to - from, _selectedTrackWidth);
     self.selectedTrackLayer.position = CGPointMake((from + to) / 2, self.edgeInsets.top + _handleDiameter/2.0-_selectedTrackWidth/2.0);
     [CATransaction commit];
 }
 
 - (void)setUnderlyingFromValue:(CGFloat)underlyingFromValue{
-    if (_underlyingFromValue != underlyingFromValue) {
+    //if (_underlyingFromValue != underlyingFromValue) {
         _underlyingFromValue = underlyingFromValue;
         [self ms_alignValues];
         [self setNeedsLayout];
-    }
+    //}
 }
 
 - (void)setUnderlyingToValue:(CGFloat)underlyingToValue{
-    if (_underlyingToValue != underlyingToValue) {
+    //if (_underlyingToValue != underlyingToValue) {
         _underlyingToValue = underlyingToValue;
         [self ms_alignValues];
         [self setNeedsLayout];
-    }
+    //}
 }
 
 - (void)ms_didPanFromThumbView:(UIPanGestureRecognizer *)gestureRecognizer

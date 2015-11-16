@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1DFF5CF1BF9F10200E79489 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E1F4F8351BF4A1860012AFFB /* FFXRangeSliderDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFXRangeSliderDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F4F8391BF4A1860012AFFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1F4F83B1BF4A1860012AFFB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		E1F4F82C1BF4A1860012AFFB = {
 			isa = PBXGroup;
 			children = (
+				E1DFF5CF1BF9F10200E79489 /* README.md */,
 				E1F4F8751BF4FE680012AFFB /* FFXRangeSlider.podspec */,
 				E1F4F86B1BF4A1A80012AFFB /* FFXRangeSlider */,
 				E1F4F8371BF4A1860012AFFB /* FFXRangeSliderDemo */,
@@ -529,6 +531,7 @@
 				E1F4F8641BF4A1860012AFFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1F4F8651BF4A1860012AFFB /* Build configuration list for PBXNativeTarget "FFXRangeSliderDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -537,6 +540,7 @@
 				E1F4F8671BF4A1860012AFFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1F4F8681BF4A1860012AFFB /* Build configuration list for PBXNativeTarget "FFXRangeSliderDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -545,6 +549,7 @@
 				E1F4F86A1BF4A1860012AFFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
