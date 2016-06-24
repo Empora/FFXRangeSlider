@@ -37,7 +37,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     self = [super initWithFrame:frame];
     
     if (self) {
-        [self ms_init];
+        [self ffx_init];
     }
     
     return self;
@@ -48,7 +48,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     self = [super initWithCoder:aDecoder];
     
     if (self) {
-        [self ms_init];
+        [self ffx_init];
     }
     
     return self;
@@ -64,14 +64,14 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 
 - (void)layoutSubviews
 {
-    [self ms_updateThumbs];
-    [self ms_updateTrackLayers];
+    [self ffx_updateThumbs];
+    [self ffx_updateTrackLayers];
     [self ffx_updateStepView];
 }
 
 - (void)setFromValue:(CGFloat)value
 {
-    value = [self ms_applySteps:value leftBoundIndex:NSNotFound rightBoundIndex:self.toIndex];
+    value = [self ffx_applySteps:value leftBoundIndex:NSNotFound rightBoundIndex:self.toIndex];
     if (_fromValue != value) {
         _fromValue = value;
         [self ffx_updateStepView];
@@ -82,7 +82,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 
 - (void)setToValue:(CGFloat)value
 {
-    value = [self ms_applySteps:value leftBoundIndex:self.fromIndex rightBoundIndex:NSNotFound];
+    value = [self ffx_applySteps:value leftBoundIndex:self.fromIndex rightBoundIndex:NSNotFound];
     if (_toValue != value) {
         _toValue = value;
         [self ffx_updateStepView];
@@ -95,7 +95,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 }
 
 - (NSUInteger)fromIndex{
-    return [self ms_calcStep:self.fromValue];
+    return [self ffx_calcStep:self.fromValue];
 }
 
 - (void)setToIndex:(NSUInteger)toIndex{
@@ -103,7 +103,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 }
 
 - (NSUInteger)toIndex{
-    return [self ms_calcStep:self.toValue];
+    return [self ffx_calcStep:self.toValue];
 }
 
 - (void)setEdgeInsets:(UIEdgeInsets)edgeInsets{
@@ -114,21 +114,21 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 - (void)setMinimumValue:(CGFloat)minValue
 {
     _minValue = minValue;
-    [self ms_alignValues];
+    [self ffx_alignValues];
     [self setNeedsLayout];
 }
 
 - (void)setMaximumValue:(CGFloat)maxValue
 {
     _maxValue = maxValue;
-    [self ms_alignValues];
+    [self ffx_alignValues];
     [self setNeedsLayout];
 }
 
 - (void)setMinimumInterval:(CGFloat)minInterval
 {
     _minInterval = minInterval;
-    [self ms_alignValues];
+    [self ffx_alignValues];
     [self setNeedsLayout];
 }
 
@@ -187,7 +187,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 
 #pragma mark - Private methods
 
-- (void)ms_init
+- (void)ffx_init
 {
     _trackWidth = _selectedTrackWidth = 2.0;
     _minValue = 0.0;
@@ -219,17 +219,17 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     self.leftHandle = [[FFXRangeSliderHandle alloc] init];
     self.leftHandle.diameter = _handleDiameter;
     [self addSubview:self.leftHandle];
-    UIGestureRecognizer *fromGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(ms_didPanFromThumbView:)];
+    UIGestureRecognizer *fromGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(ffx_didPanFromThumbView:)];
     [self.leftHandle addGestureRecognizer:fromGestureRecognizer];
     
     self.rightHandle = [[FFXRangeSliderHandle alloc] init];
     self.rightHandle.diameter = _handleDiameter;
     [self addSubview:self.rightHandle];
-    UIGestureRecognizer *toGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(ms_didPanToThumbView:)];
+    UIGestureRecognizer *toGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(ffx_didPanToThumbView:)];
     [self.rightHandle addGestureRecognizer:toGestureRecognizer];
 }
 
-- (void)ms_alignValues
+- (void)ffx_alignValues
 {
     _minValue = MIN(self.maxValue, self.minValue);
     _maxValue = MAX(self.maxValue, self.minValue);
@@ -238,7 +238,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     _fromValue = MAX(MIN(self.fromValue, self.toValue - self.minInterval), self.minValue);
 }
 
-- (void)ms_updateTrackLayers
+- (void)ffx_updateTrackLayers
 {
     BOOL showSelectedTrackLayer = self.selectTrackForDefaultSelection || (!_steps.count || self.fromIndex != 0 || self.toIndex != _steps.count-1);
     
@@ -262,7 +262,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 - (void)setUnderlyingFromValue:(CGFloat)underlyingFromValue{
     //if (_underlyingFromValue != underlyingFromValue) {
         _underlyingFromValue = underlyingFromValue;
-        [self ms_alignValues];
+        [self ffx_alignValues];
         [self setNeedsLayout];
     //}
 }
@@ -270,12 +270,12 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 - (void)setUnderlyingToValue:(CGFloat)underlyingToValue{
     //if (_underlyingToValue != underlyingToValue) {
         _underlyingToValue = underlyingToValue;
-        [self ms_alignValues];
+        [self ffx_alignValues];
         [self setNeedsLayout];
     //}
 }
 
-- (void)ms_didPanFromThumbView:(UIPanGestureRecognizer *)gestureRecognizer
+- (void)ffx_didPanFromThumbView:(UIPanGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateFailed) {
 
@@ -300,11 +300,11 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     
     CGPoint translation = [gestureRecognizer translationInView:self];
     [gestureRecognizer setTranslation:CGPointZero inView:self];
-    CGFloat fromValue = [self ms_applyTranslation:translation.x forValue:self.underlyingFromValue];
+    CGFloat fromValue = [self ffx_applyTranslation:translation.x forValue:self.underlyingFromValue];
     self.underlyingFromValue = MAX(MIN(fromValue, self.toValue - self.minInterval), self.minValue);
 }
 
-- (void)ms_didPanToThumbView:(UIPanGestureRecognizer *)gestureRecognizer
+- (void)ffx_didPanToThumbView:(UIPanGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled || gestureRecognizer.state == UIGestureRecognizerStateFailed) {
 
@@ -329,11 +329,11 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     CGPoint translation = [gestureRecognizer translationInView:self];
     [gestureRecognizer setTranslation:CGPointZero inView:self];
     
-    CGFloat toValue = [self ms_applyTranslation:translation.x forValue:self.underlyingToValue];
+    CGFloat toValue = [self ffx_applyTranslation:translation.x forValue:self.underlyingToValue];
     self.underlyingToValue = MIN(MAX(toValue, self.fromValue + self.minInterval), self.maxValue);
 }
 
-- (CGFloat)ms_applyTranslation:(CGFloat)translation forValue:(CGFloat)value
+- (CGFloat)ffx_applyTranslation:(CGFloat)translation forValue:(CGFloat)value
 {
     CGFloat width = CGRectGetWidth(self.bounds) - 2 * _handleDiameter;
     CGFloat valueRange = (self.maxValue - self.minValue);
@@ -343,7 +343,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 
 #pragma mark update handle positions
 
-- (CGPoint)ms_thumbCenterLocationForValue:(CGFloat)value
+- (CGPoint)ffx_thumbCenterLocationForValue:(CGFloat)value
 {
     CGFloat leftOffset = _edgeInsets.left + _trackAdjustments.left;
     
@@ -359,12 +359,12 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
 }
 
 
-- (void)ms_updateThumbs
+- (void)ffx_updateThumbs
 {
-    CGPoint fromThumbLocation = [self ms_thumbCenterLocationForValue:self.underlyingFromValue];
+    CGPoint fromThumbLocation = [self ffx_thumbCenterLocationForValue:self.underlyingFromValue];
     self.leftHandle.frame = CGRectMake(fromThumbLocation.x - _handleDiameter/2.0, fromThumbLocation.y, _handleDiameter, _handleDiameter);
     
-    CGPoint toThumbLocation = [self ms_thumbCenterLocationForValue:self.underlyingToValue];
+    CGPoint toThumbLocation = [self ffx_thumbCenterLocationForValue:self.underlyingToValue];
     self.rightHandle.frame = CGRectMake(toThumbLocation.x - _handleDiameter/2.0, toThumbLocation.y, _handleDiameter, _handleDiameter);
     
     BOOL atDefaultValue = (self.underlyingFromValue == self.minValue) && (self.underlyingToValue == self.maxValue);
@@ -407,7 +407,7 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     [_stepView setActiveIndexes:indexSet];
 }
 
-- (NSInteger) ms_calcStep:(CGFloat) value{
+- (NSInteger) ffx_calcStep:(CGFloat) value{
     if (self.steps.count) {
         NSUInteger numSteps = self.steps.count;
         return (NSInteger)round(value*(numSteps-1));
@@ -420,8 +420,8 @@ static CGFloat const kRangeSliderTransitionDuration = 0.2f;
     return index*(self.maxValue/(numSteps-1));
 }
 
-- (CGFloat) ms_applySteps:(CGFloat) value leftBoundIndex:(NSUInteger) leftBoundIndex rightBoundIndex:(NSUInteger) rightBoundIndex{
-    NSInteger step = [self ms_calcStep:value];
+- (CGFloat) ffx_applySteps:(CGFloat) value leftBoundIndex:(NSUInteger) leftBoundIndex rightBoundIndex:(NSUInteger) rightBoundIndex{
+    NSInteger step = [self ffx_calcStep:value];
     if (step != NSNotFound) {
         if (leftBoundIndex != NSNotFound && step <= leftBoundIndex) {
             step = leftBoundIndex + 1;
