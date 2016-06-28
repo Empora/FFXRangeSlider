@@ -2,9 +2,6 @@
 iOS Range Slider Control with configurable Steps 
 (based on https://github.com/sgl0v/MSRangeSlider)
 
-# 0.4
-Added flag ```selectTrackForDefaultSelection```: Determines whether the default range 0-MAX should be highlighted or not.
-
 FFXRangeSlider
 ===============
 [![Version](https://img.shields.io/cocoapods/v/FFXRangeSlider.svg?style=flat)](http://cocoadocs.org/docsets/FFXRangeSlider)

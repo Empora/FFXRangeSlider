@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1AAFC281D22A602002DF4DF /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = E1AAFC271D22A602002DF4DF /* CHANGELOG.md */; };
 		E1F4F83A1BF4A1860012AFFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F4F8391BF4A1860012AFFB /* main.m */; };
 		E1F4F83D1BF4A1860012AFFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F4F83C1BF4A1860012AFFB /* AppDelegate.m */; };
 		E1F4F8401BF4A1860012AFFB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F4F83F1BF4A1860012AFFB /* ViewController.m */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1AAFC271D22A602002DF4DF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		E1DFF5CF1BF9F10200E79489 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E1F4F8351BF4A1860012AFFB /* FFXRangeSliderDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFXRangeSliderDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1F4F8391BF4A1860012AFFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		E1F4F82C1BF4A1860012AFFB = {
 			isa = PBXGroup;
 			children = (
+				E1AAFC271D22A602002DF4DF /* CHANGELOG.md */,
 				E1DFF5CF1BF9F10200E79489 /* README.md */,
 				E1F4F8751BF4FE680012AFFB /* FFXRangeSlider.podspec */,
 				E1F4F86B1BF4A1A80012AFFB /* FFXRangeSlider */,
@@ -303,6 +306,7 @@
 				E1F4F83D1BF4A1860012AFFB /* AppDelegate.m in Sources */,
 				E1F4F8741BF4A9DF0012AFFB /* FFXRangeStepView.m in Sources */,
 				E1F4F83A1BF4A1860012AFFB /* main.m in Sources */,
+				E1AAFC281D22A602002DF4DF /* CHANGELOG.md in Sources */,
 				E1F4F86E1BF4A1CE0012AFFB /* FFXRangeSlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
